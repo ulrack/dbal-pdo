@@ -9,7 +9,7 @@
     "require":
     {
         "php": "^7.2",
-        "ulrack/dbal": "1.0"
+        "ulrack/dbal": "^1.0"
     },
     "authors": [
     {
@@ -26,13 +26,13 @@
         "psr-4":
         {
             "Ulrack\\Dbal\\Pdo\\": "src/"
-        },
-        "autoload-dev":
+        }
+    },
+    "autoload-dev":
+    {
+        "psr-4":
         {
-            "psr-4":
-            {
-                "Ulrack\\Dbal\\Pdo\\Tests\\": "tests/"
-            }
+            "Ulrack\\Dbal\\Pdo\\Tests\\": "tests/"
         }
     },
     "archive":
