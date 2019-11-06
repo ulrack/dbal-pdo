@@ -4,14 +4,14 @@
  * See LICENSE for license details.
  */
 
-namespace Ulrack\Dbal\Pdo\Tests\Result;
+namespace Ulrack\Dbal\Pdo\Tests\Component\Result;
 
 use PHPUnit\Framework\TestCase;
-use Ulrack\Dbal\Pdo\Result\PdoIterableQueryResult;
+use Ulrack\Dbal\Pdo\Component\Result\PdoIterableQueryResult;
 use PDOStatement;
 
 /**
- * @coversDefaultClass \Ulrack\Dbal\Pdo\Result\PdoIterableQueryResult
+ * @coversDefaultClass \Ulrack\Dbal\Pdo\Component\Result\PdoIterableQueryResult
  */
 class PdoIterableQueryResultTest extends TestCase
 {

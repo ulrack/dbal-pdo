@@ -4,13 +4,13 @@
  * See LICENSE for license details.
  */
 
-namespace Ulrack\Dbal\Pdo\Connection;
+namespace Ulrack\Dbal\Pdo\Component\Connection;
 
 use Ulrack\Dbal\Common\ConnectionInterface;
 use Ulrack\Dbal\Common\ParameterizedQueryComponentInterface;
 use Ulrack\Dbal\Common\QueryInterface;
 use Ulrack\Dbal\Common\QueryResultInterface;
-use Ulrack\Dbal\Pdo\Result\PdoQueryResult;
+use Ulrack\Dbal\Pdo\Component\Result\PdoQueryResult;
 use PDO;
 use Throwable;
 use RuntimeException;

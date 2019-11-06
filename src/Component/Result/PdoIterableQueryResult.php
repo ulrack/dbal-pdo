@@ -4,7 +4,7 @@
  * See LICENSE for license details.
  */
 
-namespace Ulrack\Dbal\Pdo\Result;
+namespace Ulrack\Dbal\Pdo\Component\Result;
 
 use Iterator;
 use Countable;

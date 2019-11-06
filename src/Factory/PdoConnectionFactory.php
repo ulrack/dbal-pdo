@@ -6,10 +6,10 @@
 
 namespace Ulrack\Dbal\Pdo\Factory;
 
-use Ulrack\Dbal\Pdo\Connection\PdoConnection;
 use PDO;
 use Throwable;
-use RuntimeException;
+use Ulrack\Dbal\Pdo\Component\Connection\PdoConnection;
+use Ulrack\Dbal\Pdo\Exception\ConnectionException;
 
 class PdoConnectionFactory
 {
@@ -23,7 +23,7 @@ class PdoConnectionFactory
      *
      * @return PdoConnection
      *
-     * @throws RuntimeException When the PDO connection can not be established.
+     * @throws ConnectionException When the PDO connection can not be established.
      */
     public function create(
         string $dsn,
@@ -40,10 +40,7 @@ class PdoConnectionFactory
 
             return new PdoConnection($connection);
         } catch (Throwable $exception) {
-            throw new RuntimeException(
-                'Could not connect to database.',
-                (int) $exception->getCode()
-            );
+            throw new ConnectionException($exception);
         }
     }
 }

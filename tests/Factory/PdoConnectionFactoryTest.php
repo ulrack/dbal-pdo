@@ -8,11 +8,12 @@ namespace Ulrack\Dbal\Pdo\Tests\Factory;
 
 use PHPUnit\Framework\TestCase;
 use Ulrack\Dbal\Pdo\Factory\PdoConnectionFactory;
-use Ulrack\Dbal\Pdo\Connection\PdoConnection;
-use RuntimeException;
+use Ulrack\Dbal\Pdo\Exception\ConnectionException;
+use Ulrack\Dbal\Pdo\Component\Connection\PdoConnection;
 
 /**
  * @coversDefaultClass \Ulrack\Dbal\Pdo\Factory\PdoConnectionFactory
+ * @covers \Ulrack\Dbal\Pdo\Exception\ConnectionException
  */
 class PdoConnectionFactoryTest extends TestCase
 {
@@ -33,7 +34,7 @@ class PdoConnectionFactoryTest extends TestCase
             )
         );
 
-        $this->expectException(RuntimeException::class);
+        $this->expectException(ConnectionException::class);
 
         $factory->create('foo', 'bar', 'baz');
     }

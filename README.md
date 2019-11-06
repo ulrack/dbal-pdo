@@ -18,7 +18,7 @@ composer require ulrack/dbal-pdo
 ### Creating a connection
 
 To establish a connection with the database through the
-`Ulrack\Dbal\Pdo\Connection\PdoConnection` object, it is preferred to use the
+`Ulrack\Dbal\Pdo\Component\Connection\PdoConnection` object, it is preferred to use the
 supplied factory in the package.
 
 First of, initialize the factory by adding:
@@ -96,14 +96,14 @@ $connection->rollback();
 
 If the query was an insertion of a new record, the insert ID can be retrieved
 by calling lastTransactionId:
-```
+```PHP
 $connection->lastTransactionId();
 ```
 
 ### Reading the result
 
 The results of a query are send back to the application through an instance of
-the `Ulrack\Dbal\Pdo\Result\PdoQueryResult` class. It is possible to iterate over
+the `Ulrack\Dbal\Pdo\Component\Result\PdoQueryResult` class. It is possible to iterate over
 this object by running it in a foreach loop. If all records should be retrieved
 at once, then the `fetchAll()` method can be called on the result object.
 

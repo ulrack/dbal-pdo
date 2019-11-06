@@ -4,19 +4,19 @@
  * See LICENSE for license details.
  */
 
-namespace Ulrack\Dbal\Pdo\Tests\Connection;
+namespace Ulrack\Dbal\Pdo\Tests\Component\Connection;
 
 use PHPUnit\Framework\TestCase;
 use Ulrack\Dbal\Common\QueryInterface;
 use Ulrack\Dbal\Common\QueryResultInterface;
 use Ulrack\Dbal\Common\ParameterizedQueryComponentInterface;
-use Ulrack\Dbal\Pdo\Connection\PdoConnection;
+use Ulrack\Dbal\Pdo\Component\Connection\PdoConnection;
 use RuntimeException;
 use PDO;
 use PDOStatement;
 
 /**
- * @coversDefaultClass \Ulrack\Dbal\Pdo\Connection\PdoConnection
+ * @coversDefaultClass \Ulrack\Dbal\Pdo\Component\Connection\PdoConnection
  */
 class PdoConnectionTest extends TestCase
 {
