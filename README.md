@@ -118,7 +118,7 @@ result object.
 The status code and errors (as a result of a failing query) can be retrieved by
 calling `getErrors` and `getStatusCode` on the result object.
 
-All SQLState status codes can be found [here](https://docs.oracle.com/cd/A84870_01/doc/appdev.816/a58231/appd.htm). 
+All SQLState status codes can be found [here](https://docs.oracle.com/cd/A84870_01/doc/appdev.816/a58231/appd.htm).
 
 ## Change log
 
@@ -130,7 +130,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT
 
 ## MIT License
 
-Copyright (c) 2019 Jyxon
+Copyright (c) 2019 GrizzIT
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
