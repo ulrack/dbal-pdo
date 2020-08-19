@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (C) GrizzIT, Inc. All rights reserved.
  * See LICENSE for license details.
@@ -12,7 +13,6 @@ use Ulrack\Dbal\Common\QueryInterface;
 use Ulrack\Dbal\Common\QueryResultInterface;
 use Ulrack\Dbal\Pdo\Component\Result\PdoQueryResult;
 use PDO;
-use Throwable;
 use RuntimeException;
 
 class PdoConnection implements ConnectionInterface

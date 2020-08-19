@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (C) GrizzIT, Inc. All rights reserved.
  * See LICENSE for license details.
@@ -97,7 +98,7 @@ class PdoIterableQueryResult implements Iterator, Countable
      *
      * @return int
      */
-    public function key() : int
+    public function key(): int
     {
         return $this->currentPosition;
     }
@@ -117,7 +118,7 @@ class PdoIterableQueryResult implements Iterator, Countable
      *
      * @return void
      */
-    public function rewind() : void
+    public function rewind(): void
     {
         $this->currentPosition = 0;
     }
@@ -127,7 +128,7 @@ class PdoIterableQueryResult implements Iterator, Countable
      *
      * @return bool
      */
-    public function valid() : bool
+    public function valid(): bool
     {
         return $this->currentPosition < $this->entryCount;
     }

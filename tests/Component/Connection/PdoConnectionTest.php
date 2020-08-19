@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (C) GrizzIT, Inc. All rights reserved.
  * See LICENSE for license details.
@@ -6,14 +7,14 @@
 
 namespace Ulrack\Dbal\Pdo\Tests\Component\Connection;
 
+use PDO;
+use PDOStatement;
+use RuntimeException;
 use PHPUnit\Framework\TestCase;
 use Ulrack\Dbal\Common\QueryInterface;
 use Ulrack\Dbal\Common\QueryResultInterface;
-use Ulrack\Dbal\Common\ParameterizedQueryComponentInterface;
 use Ulrack\Dbal\Pdo\Component\Connection\PdoConnection;
-use RuntimeException;
-use PDO;
-use PDOStatement;
+use Ulrack\Dbal\Pdo\Tests\Fixtures\ParameterizedQueryInterface;
 
 /**
  * @coversDefaultClass \Ulrack\Dbal\Pdo\Component\Connection\PdoConnection
@@ -127,15 +128,10 @@ class PdoConnectionTest extends TestCase
     public function testQuery(): void
     {
         $pdoMock = $this->createMock(PDO::class);
-
         $statementMock = $this->createMock(PDOStatement::class);
-
-        $parameterQueryMock = $this->getMockBuilder(
-            [
-                QueryInterface::class,
-                ParameterizedQueryComponentInterface::class
-            ]
-        )->getMock();
+        $parameterQueryMock = $this->createMock(
+            ParameterizedQueryInterface::class
+        );
 
         $parameterQueryMock->expects(static::once())
             ->method('getQuery')

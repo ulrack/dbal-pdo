@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (C) GrizzIT, Inc. All rights reserved.
  * See LICENSE for license details.
@@ -8,30 +9,32 @@ namespace Ulrack\Dbal\Pdo\Factory;
 
 use PDO;
 use Throwable;
-use Ulrack\Dbal\Pdo\Component\Connection\PdoConnection;
+use Ulrack\Dbal\Common\ConnectionInterface;
+use Ulrack\Dbal\Common\ConnectionFactoryInterface;
 use Ulrack\Dbal\Pdo\Exception\ConnectionException;
+use Ulrack\Dbal\Pdo\Component\Connection\PdoConnection;
 
-class PdoConnectionFactory
+class PdoConnectionFactory implements ConnectionFactoryInterface
 {
     /**
-     * Creates an instance of PdoConnection
+     * Creates an instance of a connection
      *
      * @param string      $dsn
      * @param string      $username
      * @param string|null $password
-     * @param array       $options
+     * @param array|null  $options
+     * @param array|null  $attributes
      *
-     * @return PdoConnection
-     *
-     * @throws ConnectionException When the PDO connection can not be established.
+     * @return ConnectionInterface When the connection fails.
      */
     public function create(
         string $dsn,
         string $username,
         string $password = null,
-        array $options = [],
-        array $attributes = [PDO::ATTR_EMULATE_PREPARES => false]
-    ): PdoConnection {
+        array $options = null,
+        array $attributes = null
+    ): ConnectionInterface {
+        $attributes = $attributes ?? [PDO::ATTR_EMULATE_PREPARES => false];
         try {
             $connection = new PDO($dsn, $username, $password, $options);
             foreach ($attributes as $attribute => $value) {

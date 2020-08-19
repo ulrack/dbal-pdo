@@ -22,7 +22,7 @@ To establish a connection with the database through the
 supplied factory in the package.
 
 First of, initialize the factory by adding:
-```PHP
+```php
 <?php
 
 use Ulrack\Dbal\Pdo\Factory\PdoConnectionFactory;
@@ -32,7 +32,7 @@ $factory = new PdoConnectionFactory;
 
 Then proceed to create an instance of `PdoConnection` by calling the `create` method.
 
-```
+```php
 <?php
 
 $connection = $factory->create(
@@ -82,7 +82,7 @@ send query objects to the `PdoConnection`, which will run their queries on the
 database.
 
 After a query object is fully assembled it can be executed in the following ways:
-```PHP
+```php
 // Immediate call to the database.
 $result = $connection->query($queryObject);
 
@@ -96,7 +96,7 @@ $connection->rollback();
 
 If the query was an insertion of a new record, the insert ID can be retrieved
 by calling lastTransactionId:
-```PHP
+```php
 $connection->lastTransactionId();
 ```
 
@@ -108,7 +108,7 @@ this object by running it in a foreach loop. If all records should be retrieved
 at once, then the `fetchAll()` method can be called on the result object.
 
 The amount of affected records can be retrieved by "counting" the object:
-```
+```php
 count($result); //Returns affected rows.
 ```
 
@@ -130,7 +130,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT
 
 ## MIT License
 
-Copyright (c) 2019 GrizzIT
+Copyright (c) GrizzIT
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
