@@ -7,13 +7,14 @@
 
 namespace Ulrack\Dbal\Pdo\Component\Connection;
 
-use Ulrack\Dbal\Common\ConnectionInterface;
-use Ulrack\Dbal\Common\ParameterizedQueryComponentInterface;
-use Ulrack\Dbal\Common\QueryInterface;
-use Ulrack\Dbal\Common\QueryResultInterface;
-use Ulrack\Dbal\Pdo\Component\Result\PdoQueryResult;
 use PDO;
 use RuntimeException;
+use Ulrack\Dbal\Common\QueryInterface;
+use Ulrack\Dbal\Common\ConnectionInterface;
+use Ulrack\Dbal\Common\QueryResultInterface;
+use Ulrack\Dbal\Pdo\Exception\QueryException;
+use Ulrack\Dbal\Pdo\Component\Result\PdoQueryResult;
+use Ulrack\Dbal\Common\ParameterizedQueryComponentInterface;
 
 class PdoConnection implements ConnectionInterface
 {
@@ -98,6 +99,8 @@ class PdoConnection implements ConnectionInterface
      * @param QueryInterface $query
      *
      * @return QueryResultInterface
+     *
+     * @throws QueryException When the query has an execution error.
      */
     public function query(QueryInterface $query): QueryResultInterface
     {
@@ -106,11 +109,19 @@ class PdoConnection implements ConnectionInterface
                 ->prepare($query->getQuery());
             $statement->execute($query->getParameters());
 
-            return new PdoQueryResult($statement);
+            $result = $statement;
+        } else {
+            $result = $this->connection->query($query->getQuery());
         }
 
-        return new PdoQueryResult(
-            $this->connection->query($query->getQuery())
-        );
+        if ($result === false) {
+            throw new QueryException(
+                $query->getQuery(),
+                $this->connection->errorCode() ?? 'unknown',
+                $this->connection->errorInfo() ?? ['unknown']
+            );
+        }
+
+        return new PdoQueryResult($result);
     }
 }

@@ -7,6 +7,7 @@
 
 namespace Ulrack\Dbal\Pdo\Component\Result;
 
+use PDO;
 use Iterator;
 use Countable;
 use PDOStatement;
@@ -42,6 +43,13 @@ class PdoIterableQueryResult implements Iterator, Countable
     private $currentPosition = 0;
 
     /**
+     * Contains the fetch mode for the result set.
+     *
+     * @var int
+     */
+    private $fetchMode = PDO::FETCH_ASSOC;
+
+    /**
      * Constructor
      *
      * @param  PDOStatement $statement
@@ -63,6 +71,28 @@ class PdoIterableQueryResult implements Iterator, Countable
     }
 
     /**
+     * Sets the fetch mode for queries.
+     *
+     * @param int $fetchMode
+     *
+     * @return void
+     */
+    public function setFetchMode(int $fetchMode): void
+    {
+        $this->fetchMode = $fetchMode;
+    }
+
+    /**
+     * Gets the fetch mode for queries.
+     *
+     * @return int
+     */
+    public function getFetchMode(): int
+    {
+        return $this->fetchMode;
+    }
+
+    /**
      * Fetches all rows from the result set.
      *
      * @return array
@@ -72,7 +102,7 @@ class PdoIterableQueryResult implements Iterator, Countable
         if (count($this->resultStore) < $this->entryCount) {
             $this->resultStore = array_merge(
                 $this->resultStore,
-                $this->statement->fetchAll()
+                $this->statement->fetchAll($this->fetchMode)
             );
         }
 
@@ -87,7 +117,7 @@ class PdoIterableQueryResult implements Iterator, Countable
     public function current()
     {
         if (!isset($this->resultStore[$this->currentPosition])) {
-            $this->resultStore[] = $this->statement->fetch();
+            $this->resultStore[] = $this->statement->fetch($this->fetchMode);
         }
 
         return $this->resultStore[$this->currentPosition];

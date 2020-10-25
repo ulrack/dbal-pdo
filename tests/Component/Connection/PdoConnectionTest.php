@@ -13,11 +13,13 @@ use RuntimeException;
 use PHPUnit\Framework\TestCase;
 use Ulrack\Dbal\Common\QueryInterface;
 use Ulrack\Dbal\Common\QueryResultInterface;
+use Ulrack\Dbal\Pdo\Exception\QueryException;
 use Ulrack\Dbal\Pdo\Component\Connection\PdoConnection;
 use Ulrack\Dbal\Pdo\Tests\Fixtures\ParameterizedQueryInterface;
 
 /**
  * @coversDefaultClass \Ulrack\Dbal\Pdo\Component\Connection\PdoConnection
+ * @covers \Ulrack\Dbal\Pdo\Exception\QueryException
  */
 class PdoConnectionTest extends TestCase
 {
@@ -174,5 +176,35 @@ class PdoConnectionTest extends TestCase
             QueryResultInterface::class,
             $subject->query($queryMock)
         );
+    }
+
+    /**
+     * @covers ::query
+     *
+     * @return void
+     */
+    public function testFailedQuery(): void
+    {
+        $pdoMock = $this->createMock(PDO::class);
+        $statementMock = $this->createMock(PDOStatement::class);
+
+        $queryMock = $this->createMock(
+            QueryInterface::class
+        );
+
+        $queryMock->expects(static::exactly(2))
+            ->method('getQuery')
+            ->willReturn('foo');
+
+        $pdoMock->expects(static::once())
+            ->method('query')
+            ->with('foo')
+            ->willReturn(false);
+
+        $subject = new PdoConnection($pdoMock);
+
+        $this->expectException(QueryException::class);
+
+        $subject->query($queryMock);
     }
 }

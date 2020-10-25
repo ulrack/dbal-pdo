@@ -7,9 +7,10 @@
 
 namespace Ulrack\Dbal\Pdo\Tests\Component\Result;
 
+use PDO;
+use PDOStatement;
 use PHPUnit\Framework\TestCase;
 use Ulrack\Dbal\Pdo\Component\Result\PdoIterableQueryResult;
-use PDOStatement;
 
 /**
  * @coversDefaultClass \Ulrack\Dbal\Pdo\Component\Result\PdoIterableQueryResult
@@ -25,6 +26,8 @@ class PdoIterableQueryResultTest extends TestCase
      * @covers ::next
      * @covers ::rewind
      * @covers ::valid
+     * @covers ::setFetchMode
+     * @covers ::getFetchMode
      *
      * @return void
      */
@@ -50,6 +53,10 @@ class PdoIterableQueryResultTest extends TestCase
             ->willReturn([$entryData]);
 
         $subject = new PdoIterableQueryResult($statementMock);
+
+        $this->assertEquals(PDO::FETCH_ASSOC, $subject->getFetchMode());
+        $subject->setFetchMode(PDO::FETCH_BOTH);
+        $this->assertEquals(PDO::FETCH_BOTH, $subject->getFetchMode());
 
         $this->assertInstanceOf(
             PdoIterableQueryResult::class,
