@@ -1,3 +1,5 @@
+# DEPRECATION NOTICE: this package has been moved and improved at [grizz-it/dbal-pdo](https://github.com/grizz-it/dbal-pdo)
+
 [![Build Status](https://travis-ci.com/ulrack/dbal-pdo.svg?branch=master)](https://travis-ci.com/ulrack/dbal-pdo)
 
 # Ulrack DBAL PDO
